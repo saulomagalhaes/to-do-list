@@ -1,0 +1,33 @@
+.container{
+  max-width: 46rem;
+  display: flex;
+  justify-content: center;
+  margin: 4rem auto;
+}
+.TaksCreatedAndCompleted{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  
+  & p span{
+    font-size: .75rem;
+    background: var(--gray-400);
+    font-weight: 700;
+    color: white;
+    width: 1.5625rem;
+    height: 1.1875rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-left: .5rem;
+  }
+
+  & p:nth-child(1){
+    color: var(--blue);
+    font-weight: 700;
+  }
+
+  & p:nth-child(2){
+    color: var(--purple);
+    font-weight: 700;
+  }
+}

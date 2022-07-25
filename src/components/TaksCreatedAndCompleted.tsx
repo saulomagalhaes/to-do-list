@@ -5,7 +5,7 @@ function TaksCreatedAndCompleted() {
     <div className={styles.container}>
       <div className={styles.TaksCreatedAndCompleted}>
         <p>
-          Terefas Criadas <span>0</span>
+          Tarefas Criadas <span>0</span>
         </p>
         <p>
           Concluídas <span>0</span>

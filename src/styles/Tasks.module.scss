@@ -41,6 +41,13 @@
         height: 1.5rem;
         margin-right: 1rem;
       }
+
+      button {
+        cursor: pointer;
+        background: transparent;
+        border: none;
+        margin-left: 0.5rem;
+      }
     }
   }
 }

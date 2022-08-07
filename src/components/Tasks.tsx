@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { FaPencilAlt } from "react-icons/fa";
-// import { Modal } from "./Modal";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
 import Trash from "../assets/Trash.svg";
-import { deleteTask, editTask } from "../redux/slice/taskSlice";
+import { deleteTask, editTask, toggleTask } from "../redux/slice/taskSlice";
 import { RootState } from "../redux/store";
 import styles from "../styles/Tasks.module.scss";
 Modal.setAppElement("#root");
@@ -14,10 +13,12 @@ function Tasks() {
   const dispatch = useDispatch();
 
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [contentEdited, setContent] = useState<{ id: string; content: string }>({
-    id: "",
-    content: "",
-  });
+  const [contentEdited, setContent] = useState<{ id: string; content: string }>(
+    {
+      id: "",
+      content: "",
+    }
+  );
 
   const removeTask = (id: string) => {
     dispatch(deleteTask(id));
@@ -28,9 +29,13 @@ function Tasks() {
     openModal();
   };
 
+  const handleCheckbox = (id: string, checked: boolean) => {
+    dispatch(toggleTask({id, checked}));
+  };
+
   const saveTask = () => {
     const { id, content } = contentEdited;
-    dispatch(editTask({id, content}));
+    dispatch(editTask({ id, content }));
     closeModal();
   };
 
@@ -46,21 +51,28 @@ function Tasks() {
     <>
       <div className={styles.container}>
         <ul>
-          {tasks.map((task) => (
-            <li key={task.id}>
+          {tasks.map(({id, content, isCompleted}) => (
+            <li key={id}>
               <div>
-                <input type="radio" id={task.id} />
-                <label htmlFor={task.id}>
-                  <p>{task.content}</p>
+                <input
+                  type="checkbox"
+                  checked={isCompleted}
+                  id={id}
+                  onChange={({target}) => handleCheckbox(id, target.checked)}
+                />
+                <label htmlFor={id}>
+                  <p className={isCompleted ? styles['complete-task']: ""}>
+                    {content}
+                  </p>
                 </label>
               </div>
               <button
                 type="button"
-                onClick={() => updateTask(task.id, task.content)}
+                onClick={() => updateTask(id, content)}
               >
                 <FaPencilAlt color="#808080" />
               </button>
-              <button type="button" onClick={() => removeTask(task.id)}>
+              <button type="button" onClick={() => removeTask(id)}>
                 <img src={Trash} alt="trash" />
               </button>
             </li>
@@ -78,12 +90,12 @@ function Tasks() {
           <input
             type="text"
             value={contentEdited.content}
-            onChange={(e) => setContent({ ...contentEdited, content: e.target.value })}
+            onChange={(e) =>
+              setContent({ ...contentEdited, content: e.target.value })
+            }
           />
-          <button type="submit">
-            Salvar
-          </button>
-          </form>
+          <button type="submit">Salvar</button>
+        </form>
       </Modal>
     </>
   );

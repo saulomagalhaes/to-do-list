@@ -10,6 +10,7 @@ export const taskSlice = createSlice({
       const newTask = {
         id: uuid(),
         content: action.payload,
+        isCompleted: false,
       }
       state.push(newTask)
     },
@@ -27,9 +28,16 @@ export const taskSlice = createSlice({
       }
       
     },
+    toggleTask: (state, action) => {
+      const { id, checked } = action.payload
+      const task = state.find(task => task.id === id)
+      if (task) {
+        task.isCompleted = checked;
+      }
+    }
   },
 })
 
-export const { addTask, deleteTask, editTask } = taskSlice.actions
+export const { addTask, deleteTask, editTask, toggleTask } = taskSlice.actions
 
 export default taskSlice.reducer

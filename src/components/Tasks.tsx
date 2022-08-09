@@ -1,16 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaPencilAlt } from "react-icons/fa";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
 import Trash from "../assets/Trash.svg";
-import { deleteTask, editTask, toggleTask } from "../redux/slice/taskSlice";
+import { deleteTask, editTask, setState, toggleTask } from "../redux/slice/taskSlice";
 import { RootState } from "../redux/store";
 import styles from "../styles/Tasks.module.scss";
 Modal.setAppElement("#root");
 
-function Tasks() {
-  const tasks = useSelector((state: RootState) => state.task);
+function  Tasks({localTasks}: any) {
   const dispatch = useDispatch();
+  const tasks = useSelector((state: RootState) => state.task);
+  useEffect(() => {
+    dispatch(setState(localTasks));
+  } , []);
+  console.log(tasks);
 
   const [modalIsOpen, setIsOpen] = useState(false);
   const [contentEdited, setContent] = useState<{ id: string; content: string }>(

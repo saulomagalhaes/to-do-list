@@ -13,6 +13,7 @@ export const taskSlice = createSlice({
         isCompleted: false,
       }
       state.push(newTask)
+      localStorage.setItem('tasks', JSON.stringify(state))
     },
     editTask: (state, action) => {
       const { id, content } = action.payload
@@ -20,13 +21,14 @@ export const taskSlice = createSlice({
       if (task) {
         task.content = content
       }
+      localStorage.setItem('tasks', JSON.stringify(state))
     },
     deleteTask: (state, action) => {
       const task = state.find(task => task.id === action.payload)
       if (task) {
         state.splice(state.indexOf(task), 1)
       }
-      
+      localStorage.setItem('tasks', JSON.stringify(state))
     },
     toggleTask: (state, action) => {
       const { id, checked } = action.payload
@@ -34,10 +36,14 @@ export const taskSlice = createSlice({
       if (task) {
         task.isCompleted = checked;
       }
+      localStorage.setItem('tasks', JSON.stringify(state))
+    },
+    setState: (state, action) => {
+      state.unshift(...action.payload);
     }
   },
 })
 
-export const { addTask, deleteTask, editTask, toggleTask } = taskSlice.actions
+export const { addTask, deleteTask, editTask, toggleTask, setState } = taskSlice.actions
 
 export default taskSlice.reducer

@@ -4,7 +4,7 @@ import { TaskEmpty } from "./TaskEmpty";
 import { Tasks } from "./Tasks";
 
 function ListTasks() {
-  const tasks = useSelector((state: RootState) => state.task);
+  const tasks = useSelector((state: RootState) => state);
   if (tasks.length === 0) {
     return <TaskEmpty />;
   }

@@ -9,7 +9,7 @@ import styles from "../styles/Tasks.module.scss";
 Modal.setAppElement("#root");
 
 function Tasks() {
-  const tasks = useSelector((state: RootState) => state.task);
+  const tasks = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
 
   const [modalIsOpen, setIsOpen] = useState(false);

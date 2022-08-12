@@ -8,7 +8,7 @@ Projeto de uma lista de tarefas utilizando React, Redux, Typescript e Scss modul
 
 ## Deploy
 
-Link do projeto em funcionamento https://to-do-app-three-psi.vercel.app/
+Veja o projeto em funcionamento https://to-do-app-three-psi.vercel.app/
 
 ## Autor
 

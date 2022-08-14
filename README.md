@@ -1,7 +1,7 @@
 
 # ToDoList
 
-Projeto de uma lista de tarefas utilizando React, Redux, Typescript e Scss modules, além de persistir os dados no localstorage
+Projeto de uma lista de tarefas utilizando React, Redux, Typescript e Css Modules, além de persistir os dados no localstorage.
 
 ## Deploy
 
